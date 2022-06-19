@@ -1,5 +1,5 @@
+
 import json
-d1 = {}
 print("WELCOME TO CRUD OPERATION")
 while True:
     try:
@@ -9,50 +9,37 @@ while True:
         def create():
             a = input("enter your mo.number: ")
             if len(a) == 10:
-                with open("crud.json","w") as obj1:
+                with open("crud.json","r") as obj1:
+                    if obj1.read() == "":
+                        d1 ={}
+                    else:
+                        obj1.seek(0)
+                        d1 = json.load(obj1)
                     d1[a]=({"name":input("enter your name: "),
-                    "email":input("enter your email: "),"address":input("enter your address: ")})
-                    json.dump(d1,obj1,indent=6)
-                    print()
-                    print("your info created successfully")
+                            "email":input("enter your email: "),"address":input("enter your address: ")})
+                    with open("crud.json","w") as obj1:
+                        json.dump(d1,obj1,indent=6)
+                        print()
+                        print("your info created successfully")
             else:
                 print()
                 print("please enter valid mo.number: ")
+                create()
         def read():
             mo = (input("enter your mo.number: "))
             if len(mo) == 10:
-                if mo in d1:
-                    with open("crud.json","r") as obj2:
-                        r  = json.load(obj2)
-                        print()
-                        print(r)
-                else:
-                    if mo in d1:
-                        pass
-                        print()
+                with open("crud.json","r") as red:
+                    lo = json.load(red)
+                    if mo in lo:
+                        print(lo[mo])
                     else:
                         print()
-                        print("your mo.number does not exist")
-                    for i in d1:
-                        g = i
-                        while mo != g:
-                            mo = (input("enter  your mo. number1: "))
-                            print()
-                            if len(mo) == 10:
-                                if mo in d1:
-                                    with open("crud.json","r") as obj2:
-                                        r  = json.load(obj2)
-                                        print()
-                                        print(r)
-                                    print()
-                                    print("operation successful....")
-                                else:
-                                    print("your mo.number does not exist")
-                            else:
-                                print("please enter valid mo.number")
+                        print("number does not exist: ")
+                        read()
             else:
                 print()
-                print("please enter valid mo.number")
+                print("number is not valid: : ")
+                read()
         def update():
             v = (input('which mo.number of data do you want to update: '))
             if len(v) == 10:
@@ -67,32 +54,16 @@ while True:
                             print()
                             print("updated successfully.......")
                     else:
-                        if v in data:
-                            print("your enter mo.number is wrong\nplease try again")
-                            for j in data:
-                                m = j
-                                while v != m:
-                                    v = input("which mo.number of data do you want to update: ")
-                                    print()
-                                    if v != m :
-                                        print("your enter mo.number is wrong\nplease try again")
-                                print("operation successfully....")
-                                print()
-                                if v in data:
-                                    a = {"name":input("enter your name: "),"email":input("enter your email: "),
-                                         "address":input("enter your address: ")}
-                                    data[v] = a
-                                    with open("crud.json","w") as obj4:
-                                        json.dump(data,obj4,indent=6)
-                                        print()
-                                        print("updated successfully.......")
-                        else:
-                            print()
-                            print("your mo.number does not exist")
+                        print()
+                        print("your mo.number does not exist")
+                        update()
             else:
                 print()
                 print("please enter valid mo.number")
+                update()
         def delete():
+            with open("crud.json","r") as data:
+                d1 = json.load(data)
             m = (input("which mo.number of data do you want to delete: "))
             if len(m) == 10:
                 if m in d1:
@@ -102,23 +73,13 @@ while True:
                         print()
                         print("successfully deleted")
                 else:
-                    if m in d1:
-                        pass
-                        print()
-                    else:
-                        print()
-                        print("your entered mo.number does not exist")
-                    for i in d1:
-                        n = i
-                        while m != n:
-                            m = (input("which mo.number of data do you want to delete: "))
-                            if m != n:
-                                print("your enter mo.number is wrong\nplease try again")
-                        print()
-                        print("operation successful....")
+                    print()
+                    print("Number does not exist: ")
+                    delete()
             else:
                 print()
                 print("please enter valid mo.number")
+                delete()
         choice = int(input("enter your choice: "))
         if choice == 1:
             create()
@@ -131,4 +92,5 @@ while True:
         else:
             break
     except:
-        print("please first enter your choice")
+        print()
+        print("your mobail number does not exist")
