@@ -1,10 +1,10 @@
 
 import json
-print("WELCOME TO CRUD OPERATION")
+print('\033[35m',"WELCOME TO CRUD OPERATION",'\033[0m')
 while True:
     try:
         print()
-        print("press 1 for create\npress 2 for read\npress 3 for update\npress 4 for delete\npress 5 for exit")
+        print('\033[33m',"press 1 for create \n press 2 for read \n press 3 for update \n press 4 for delete \n press 5 for exit",'\033[0m')
         print()
         def create():
             a = input("enter your mo.number: ")
@@ -20,10 +20,10 @@ while True:
                     with open("crud.json","w") as obj1:
                         json.dump(d1,obj1,indent=6)
                         print()
-                        print("your info created successfully")
+                        print('\033[36m'," your info created successfully ",'\033[0m')
             else:
                 print()
-                print("please enter valid mo.number: ")
+                print('\033[31m',"please enter valid mo.number: ",'\033[0m')
                 create()
         def read():
             mo = (input("enter your mo.number: "))
@@ -31,14 +31,15 @@ while True:
                 with open("crud.json","r") as red:
                     lo = json.load(red)
                     if mo in lo:
+                        print()
                         print(lo[mo])
                     else:
                         print()
-                        print("number does not exist: ")
+                        print('\033[34m',"number does not exist: ",'\033[0m')
                         read()
             else:
                 print()
-                print("number is not valid: : ")
+                print('\033[38m',"number is not valid: : ")
                 read()
         def update():
             v = (input('which mo.number of data do you want to update: '))
@@ -52,14 +53,14 @@ while True:
                         with open("crud.json","w") as obj4:
                             json.dump(data,obj4,indent=6)
                             print()
-                            print("updated successfully.......")
+                            print('\033[32m',"updated successfully.......",'\033[0m')
                     else:
                         print()
-                        print("your mo.number does not exist")
+                        print('\033[35m',"your mo.number does not exist",'\033[0m')
                         update()
             else:
                 print()
-                print("please enter valid mo.number")
+                print('\033[33m',"please enter valid mo.number",'\033[0m')
                 update()
         def delete():
             with open("crud.json","r") as data:
@@ -71,14 +72,14 @@ while True:
                     with open("crud.json","w") as obj5:
                         json.dump(d1,obj5,indent=6)
                         print()
-                        print("successfully deleted")
+                        print('\033[31m',"successfully deleted",'\033[0m')
                 else:
                     print()
-                    print("Number does not exist: ")
+                    print('\033[34m',"Number does not exist: ",'\033[0m')
                     delete()
             else:
                 print()
-                print("please enter valid mo.number")
+                print('\033[37m',"please enter valid mo.number",'\033[0m')
                 delete()
         choice = int(input("enter your choice: "))
         if choice == 1:
@@ -93,4 +94,4 @@ while True:
             break
     except:
         print()
-        print("your mobail number does not exist")
+        print('\033[37m',"your mobail number does not exist",'\033[0m')
