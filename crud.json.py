@@ -1,5 +1,5 @@
 
-import json
+import json,os
 print('\033[1m','\033[91m',"WELCOME TO CRUD OPERATION",'\033[0m')
 while True:
     try:
@@ -9,18 +9,22 @@ while True:
         def create():
             a = input("Enter your no.number: ")
             if len(a) == 10:
-                with open("crud.json","r") as obj1:
-                    if obj1.read() == "":
-                        d1 ={}
-                    else:
-                        obj1.seek(0)
-                        d1 = json.load(obj1)
-                    d1[a]=({"name":input("Enter your name: "),
-                            "email":input("Enter your email: "),"address":input("Enter your address: ")})
-                    with open("crud.json","w") as obj1:
-                        json.dump(d1,obj1,indent=6)
-                        print()
-                        print('\033[35m'," Your info created successfully ",'\033[0m')
+                if os.path.exists("crud.json"):
+                    with open("crud.json","r") as obj1:
+                        if obj1.read() == "":
+                            d1 ={}
+                        else:
+                            obj1.seek(0)
+                            d1 = json.load(obj1)
+                        d1[a]=({"name":input("Enter your name: "),
+                                "email":input("Enter your email: "),"address":input("Enter your address: ")})
+                        with open("crud.json","w") as obj1:
+                            json.dump(d1,obj1,indent=4)
+                            print()
+                            print('\033[35m'," Your info created successfully ",'\033[0m')
+                else:
+                    with open('crud.json','w'):
+                        create()
             else:
                 print()
                 print('\033[35m',"Please enter valid mo.number: ",'\033[0m')
@@ -51,7 +55,7 @@ while True:
                              "address":input("Enter your address: ")}
                         data[v] = a
                         with open("crud.json","w") as obj4:
-                            json.dump(data,obj4,indent=6)
+                            json.dump(data,obj4,indent=4)
                             print()
                             print('\033[37m',"Updated Successfully.......",'\033[0m')
                     else:
@@ -70,7 +74,7 @@ while True:
                 if m in d1:
                     d1.pop(m)
                     with open("crud.json","w") as obj5:
-                        json.dump(d1,obj5,indent=6)
+                        json.dump(d1,obj5,indent=4)
                         print()
                         print('\033[36m',"Successfully Deleted",'\033[0m')
                 else:
