@@ -7,9 +7,9 @@ while True:
         print('\033[33m',"press 1 for create \n press 2 for read \n press 3 for update \n press 4 for delete \n press 5 for exit",'\033[0m')
         print()
         def create():
-            a = input("Enter your no.number: ")
-            if len(a) == 10:
-                if os.path.exists("crud.json"):
+            if os.path.exists("crud.json"):
+                a = input("Enter your no.number: ")
+                if len(a) == 10:
                     with open("crud.json","r") as obj1:
                         if obj1.read() == "":
                             d1 ={}
@@ -23,12 +23,12 @@ while True:
                             print()
                             print('\033[35m'," Your info created successfully ",'\033[0m')
                 else:
-                    with open('crud.json','w'):
-                        create()
+                    print()
+                    print('\033[35m',"Please enter valid mo.number: ",'\033[0m')
+                    create()
             else:
-                print()
-                print('\033[35m',"Please enter valid mo.number: ",'\033[0m')
-                create()
+                with open('crud.json','w'):
+                    create()
         def read():
             mo = (input("Enter your mo.number: "))
             if len(mo) == 10:
